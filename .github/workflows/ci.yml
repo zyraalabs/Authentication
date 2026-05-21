@@ -39,8 +39,17 @@ jobs:
         env:
           NEXTAUTH_SECRET: ci-placeholder
           NEXTAUTH_URL: http://localhost:3001
+          NEXTAUTH_COOKIE_DOMAIN: .example.com
           MONGODB_URI: mongodb://localhost:27017/ci
           JWT_SECRET: ci-placeholder
           UPSTASH_REDIS_REST_URL: https://placeholder.upstash.io
           UPSTASH_REDIS_REST_TOKEN: ci-placeholder
-          NEXTAUTH_COOKIE_DOMAIN: .example.com
+          RESEND_API_KEY: re_ci_placeholder
+          RESEND_FROM_EMAIL: noreply@example.com
+          ZYRAA_APP_URL: http://localhost:3002
+          NEXT_PUBLIC_HOME_URL: http://localhost:3000
+          ARCJET_KEY: ajkey_ci_placeholder
+          GOOGLE_CLIENT_ID: ci-placeholder
+          GOOGLE_CLIENT_SECRET: ci-placeholder
+          GITHUB_CLIENT_ID: ci-placeholder
+          GITHUB_CLIENT_SECRET: ci-placeholder
