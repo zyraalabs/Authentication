@@ -43,3 +43,4 @@ jobs:
           JWT_SECRET: ci-placeholder
           UPSTASH_REDIS_REST_URL: https://placeholder.upstash.io
           UPSTASH_REDIS_REST_TOKEN: ci-placeholder
+          NEXTAUTH_COOKIE_DOMAIN: .example.com
