@@ -26,7 +26,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
 
       - name: Type check
         run: pnpm exec tsc --noEmit
