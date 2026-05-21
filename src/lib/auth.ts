@@ -1,22 +1,22 @@
-import { NextAuthOptions } from "next-auth";
-import GoogleProvider, { GoogleProfile } from "next-auth/providers/google";
-import GitHubProvider from "next-auth/providers/github";
-import CredentialsProvider from "next-auth/providers/credentials";
-import bcrypt from "bcryptjs";
-import { connectToDatabase } from "@/lib/db";
 import { Plan, Provider, UserModel } from "@zyraalabs/zyraa-db";
-import mongoose from "mongoose";
-import { logger } from "@/lib/logger";
+import bcrypt from "bcryptjs";
+import type mongoose from "mongoose";
+import type { NextAuthOptions } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+import GitHubProvider from "next-auth/providers/github";
+import GoogleProvider, { type GoogleProfile } from "next-auth/providers/google";
+import { connectToDatabase } from "@/lib/db";
 import {
-  GOOGLE_CLIENT_ID,
-  GOOGLE_CLIENT_SECRET,
   GITHUB_CLIENT_ID,
   GITHUB_CLIENT_SECRET,
-  NEXTAUTH_SECRET,
-  NEXTAUTH_COOKIE_DOMAIN,
-  IS_PRODUCTION,
+  GOOGLE_CLIENT_ID,
+  GOOGLE_CLIENT_SECRET,
   IS_DEVELOPMENT,
+  IS_PRODUCTION,
+  NEXTAUTH_COOKIE_DOMAIN,
+  NEXTAUTH_SECRET,
 } from "@/lib/env";
+import { logger } from "@/lib/logger";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -47,7 +47,7 @@ export const authOptions: NextAuthOptions = {
 
           const isValidPassword = await bcrypt.compare(
             credentials.password,
-            user.password
+            user.password,
           );
           if (!isValidPassword) return null;
 
@@ -110,7 +110,7 @@ export const authOptions: NextAuthOptions = {
             const providerExists = existingUser.providers.some(
               (p) =>
                 p.provider === account.provider &&
-                p.providerAccountId === account.providerAccountId
+                p.providerAccountId === account.providerAccountId,
             );
 
             if (!providerExists) {
@@ -124,7 +124,7 @@ export const authOptions: NextAuthOptions = {
               await existingUser.save();
               logger.info(
                 "signIn",
-                `Added ${account.provider} provider to existing user: ${user.email}`
+                `Added ${account.provider} provider to existing user: ${user.email}`,
               );
             }
 
@@ -139,7 +139,7 @@ export const authOptions: NextAuthOptions = {
 
             logger.info(
               "signIn",
-              `OAuth sign in successful for existing user: ${user.email}`
+              `OAuth sign in successful for existing user: ${user.email}`,
             );
             return true;
           }
@@ -151,8 +151,8 @@ export const authOptions: NextAuthOptions = {
               account.provider === "google"
                 ? (profile as GoogleProfile)?.email_verified || false
                 : account.provider === "github"
-                ? true
-                : false,
+                  ? true
+                  : false,
             providers: [
               {
                 provider:
@@ -174,7 +174,7 @@ export const authOptions: NextAuthOptions = {
           await newUser.save();
           logger.info(
             "signIn",
-            `New user created via ${account.provider}: ${user.email}`
+            `New user created via ${account.provider}: ${user.email}`,
           );
           return true;
         }

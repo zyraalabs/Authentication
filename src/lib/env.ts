@@ -33,8 +33,7 @@ export const RESEND_FROM_EMAIL =
   process.env.RESEND_FROM_EMAIL ?? "onboarding@resend.dev";
 
 // ── Upstash Redis ─────────────────────────────────────────────────────────────
-export const UPSTASH_REDIS_REST_URL =
-  process.env.UPSTASH_REDIS_REST_URL ?? "";
+export const UPSTASH_REDIS_REST_URL = process.env.UPSTASH_REDIS_REST_URL ?? "";
 export const UPSTASH_REDIS_REST_TOKEN =
   process.env.UPSTASH_REDIS_REST_TOKEN ?? "";
 

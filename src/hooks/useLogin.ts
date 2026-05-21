@@ -3,11 +3,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
-import { loginSchema, type LoginInput } from "@/lib/validations";
+import { type LoginInput, loginSchema } from "@/lib/validations";
 
-type LoginResult =
-  | { code: "success" }
-  | { code: "error"; message: string };
+type LoginResult = { code: "success" } | { code: "error"; message: string };
 
 async function loginWithCredentials(
   data: LoginInput,
@@ -21,7 +19,10 @@ async function loginWithCredentials(
     });
 
     if (!result || result.error) {
-      return { code: "error", message: result?.error ?? "Invalid credentials." };
+      return {
+        code: "error",
+        message: result?.error ?? "Invalid credentials.",
+      };
     }
 
     return { code: "success" };

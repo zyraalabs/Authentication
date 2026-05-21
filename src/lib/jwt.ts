@@ -1,6 +1,6 @@
-import { SignJWT, jwtVerify } from "jose";
-import { logger } from "./logger";
+import { jwtVerify, SignJWT } from "jose";
 import { JWT_SECRET } from "./env";
+import { logger } from "./logger";
 
 export interface JWTPayload {
   sub: string;

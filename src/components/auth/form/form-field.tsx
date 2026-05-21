@@ -18,9 +18,7 @@ export function FormField({ label, right, error, inputProps }: FormFieldProps) {
         {right}
       </div>
       <Input aria-invalid={!!error} {...inputProps} />
-      {error && (
-        <p className="text-[11.5px] text-destructive">{error}</p>
-      )}
+      {error && <p className="text-[11.5px] text-destructive">{error}</p>}
     </div>
   );
 }

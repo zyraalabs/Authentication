@@ -15,7 +15,10 @@ interface EmailCodeBlockProps {
 
 const mono = "'Courier New', monospace";
 
-export function EmailCodeBlock({ lines, label = "zsh · ~/projects" }: EmailCodeBlockProps) {
+export function EmailCodeBlock({
+  lines,
+  label = "zsh · ~/projects",
+}: EmailCodeBlockProps) {
   return (
     <Section
       style={{
@@ -34,10 +37,41 @@ export function EmailCodeBlock({ lines, label = "zsh · ~/projects" }: EmailCode
         }}
       >
         <Text style={{ margin: 0, lineHeight: "1" }}>
-          <span style={{ display: "inline-block", width: "9px", height: "9px", borderRadius: "50%", backgroundColor: "#FF5F57", marginRight: "5px" }} />
-          <span style={{ display: "inline-block", width: "9px", height: "9px", borderRadius: "50%", backgroundColor: "#FFBD2E", marginRight: "5px" }} />
-          <span style={{ display: "inline-block", width: "9px", height: "9px", borderRadius: "50%", backgroundColor: "#28CA41", marginRight: "10px" }} />
-          <span style={{ fontFamily: mono, fontSize: "10px", color: "#5A5850" }}>{label}</span>
+          <span
+            style={{
+              display: "inline-block",
+              width: "9px",
+              height: "9px",
+              borderRadius: "50%",
+              backgroundColor: "#FF5F57",
+              marginRight: "5px",
+            }}
+          />
+          <span
+            style={{
+              display: "inline-block",
+              width: "9px",
+              height: "9px",
+              borderRadius: "50%",
+              backgroundColor: "#FFBD2E",
+              marginRight: "5px",
+            }}
+          />
+          <span
+            style={{
+              display: "inline-block",
+              width: "9px",
+              height: "9px",
+              borderRadius: "50%",
+              backgroundColor: "#28CA41",
+              marginRight: "10px",
+            }}
+          />
+          <span
+            style={{ fontFamily: mono, fontSize: "10px", color: "#5A5850" }}
+          >
+            {label}
+          </span>
         </Text>
       </Section>
 
@@ -53,8 +87,13 @@ export function EmailCodeBlock({ lines, label = "zsh · ~/projects" }: EmailCode
             lineHeight: "1.6",
           }}
         >
-          <span style={{ color: "#F0922A", fontWeight: "700" }}>Z&nbsp;&nbsp;Zyraa</span>
-          <span style={{ color: "#6B6760" }}> · AI-powered full-stack builder</span>
+          <span style={{ color: "#F0922A", fontWeight: "700" }}>
+            Z&nbsp;&nbsp;Zyraa
+          </span>
+          <span style={{ color: "#6B6760" }}>
+            {" "}
+            · AI-powered full-stack builder
+          </span>
           <span style={{ color: "#6B6760", float: "right" }}>v0.1.0</span>
         </Text>
       </Section>
@@ -80,10 +119,10 @@ export function EmailCodeBlock({ lines, label = "zsh · ~/projects" }: EmailCode
             {line.brand && (
               <span style={{ color: "#F0922A", fontWeight: "700" }}>○ </span>
             )}
-            <span style={{ fontWeight: line.prompt ? "600" : "400" }}>{line.text}</span>
-            {line.dim && (
-              <span style={{ color: "#6B6760" }}> {line.dim}</span>
-            )}
+            <span style={{ fontWeight: line.prompt ? "600" : "400" }}>
+              {line.text}
+            </span>
+            {line.dim && <span style={{ color: "#6B6760" }}> {line.dim}</span>}
           </Text>
         ))}
       </Section>

@@ -4,7 +4,7 @@ class Logger {
   private formatMessage(
     fnName: string,
     message: string,
-    level: LogLevel
+    level: LogLevel,
   ): string {
     const timestamp = new Date().toISOString();
     const levelStr = level.toUpperCase().padEnd(5);

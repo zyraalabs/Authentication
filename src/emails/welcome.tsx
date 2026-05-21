@@ -9,7 +9,11 @@ interface WelcomeEmailProps {
 }
 
 const CLI_LINES = [
-  { success: true, text: "built todo app with auth", dim: "· 14 files · 18.4s" },
+  {
+    success: true,
+    text: "built todo app with auth",
+    dim: "· 14 files · 18.4s",
+  },
   { brand: true, text: "Detecting framework…", dim: "nextjs · SSR required" },
   { success: true, text: "scaffolded", dim: "· 0.9s" },
   { brand: true, text: "Writing files…", dim: "src/app/dashboard/page.tsx" },

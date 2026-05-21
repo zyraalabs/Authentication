@@ -1,6 +1,6 @@
+import type { Metadata } from "next";
 import { AuthLayout } from "@/components/auth/auth-layout";
 import { RegisterForm } from "@/components/auth/register-form";
-import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Create account | Zyraa",

@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { axiosInstance } from "@/lib/axiosInstance";
 import { requestHandler } from "@/lib/requestHandler";
-import { registerSchema, type RegisterInput } from "@/lib/validations";
+import { type RegisterInput, registerSchema } from "@/lib/validations";
 
 interface RegisterResponse {
   success: boolean;
@@ -32,7 +32,9 @@ export function useRegister() {
     const result = await register(data);
 
     if (result.code === "success") {
-      setSuccessMessage(result.data.data.message ?? "Account created! Check your email.");
+      setSuccessMessage(
+        result.data.data.message ?? "Account created! Check your email.",
+      );
       form.reset();
     } else {
       const message = isAxiosError<{ error?: string }>(result.error)

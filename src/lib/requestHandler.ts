@@ -1,4 +1,4 @@
-import { type AxiosError, type AxiosResponse } from "axios";
+import type { AxiosError, AxiosResponse } from "axios";
 
 type BaseRequest<T, V> = (params: T) => Promise<AxiosResponse<V>>;
 

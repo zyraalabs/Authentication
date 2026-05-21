@@ -6,7 +6,10 @@ import { useForm } from "react-hook-form";
 import { axiosInstance } from "@/lib/axiosInstance";
 import { requestHandler } from "@/lib/requestHandler";
 import { showToast } from "@/lib/toast";
-import { forgotPasswordSchema, type ForgotPasswordInput } from "@/lib/validations";
+import {
+  type ForgotPasswordInput,
+  forgotPasswordSchema,
+} from "@/lib/validations";
 
 interface ForgotPasswordResponse {
   success: boolean;
@@ -27,7 +30,9 @@ export function useForgotPassword() {
     const result = await forgotPassword(data);
 
     if (result.code === "success") {
-      showToast.success(result.data.data.message ?? "Reset link sent! Check your inbox.");
+      showToast.success(
+        result.data.data.message ?? "Reset link sent! Check your inbox.",
+      );
       form.reset();
     } else {
       const message = isAxiosError<{ error?: string }>(result.error)

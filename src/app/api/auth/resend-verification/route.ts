@@ -1,14 +1,14 @@
-import { NextRequest } from "next/server";
-import { connectToDatabase } from "@/lib/db";
-import { SuccessResponse, ErrorResponse } from "@/lib/apiResponse";
 import { UserModel } from "@zyraalabs/zyraa-db";
+import type { NextRequest } from "next/server";
 import { z } from "zod";
+import { ErrorResponse, SuccessResponse } from "@/lib/apiResponse";
+import { connectToDatabase } from "@/lib/db";
+import { sendVerificationEmail } from "@/lib/email";
+import { logger } from "@/lib/logger";
 import {
   generateVerificationToken,
   getVerificationTokenExpiry,
 } from "@/lib/tokens";
-import { sendVerificationEmail } from "@/lib/email";
-import { logger } from "@/lib/logger";
 
 const resendSchema = z.object({
   email: z.string().email("Please provide a valid email address").toLowerCase(),
@@ -44,13 +44,13 @@ export async function POST(request: NextRequest) {
       await sendVerificationEmail(email, user.name ?? "", verificationToken);
       logger.info(
         "resend-verification",
-        `Verification email sent successfully to: ${email}`
+        `Verification email sent successfully to: ${email}`,
       );
     } catch (emailError) {
       logger.error(
         "resend-verification",
         `Failed to send verification email to: ${email}`,
-        emailError
+        emailError,
       );
       return ErrorResponse("Failed to send verification email", 500);
     }
@@ -62,7 +62,7 @@ export async function POST(request: NextRequest) {
     if (error instanceof z.ZodError) {
       logger.warn(
         "resend-verification",
-        `Validation error: ${error.issues[0].message}`
+        `Validation error: ${error.issues[0].message}`,
       );
       return ErrorResponse(error.issues[0].message, 400);
     }

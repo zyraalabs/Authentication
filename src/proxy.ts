@@ -1,8 +1,8 @@
 import arcjet, { detectBot, shield } from "@arcjet/next";
-import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
-import { NEXTAUTH_SECRET, ZYRAA_APP_URL, IS_PRODUCTION } from "@/lib/env";
+import { IS_PRODUCTION, NEXTAUTH_SECRET, ZYRAA_APP_URL } from "@/lib/env";
 
 const aj = arcjet({
   key: process.env.ARCJET_KEY!,

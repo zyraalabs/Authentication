@@ -1,7 +1,7 @@
 "use client";
 
-import { signOut } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
+import { signOut } from "next-auth/react";
 import { Suspense, useEffect } from "react";
 
 function SignOutInner() {

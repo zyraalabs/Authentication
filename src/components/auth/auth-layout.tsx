@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
-import { BackButton } from "./back-button";
 import { AuthLeft } from "./auth-left";
+import { BackButton } from "./back-button";
 
 export function AuthLayout({ children }: { children: ReactNode }) {
   return (

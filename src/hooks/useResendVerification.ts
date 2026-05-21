@@ -6,7 +6,10 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { axiosInstance } from "@/lib/axiosInstance";
 import { requestHandler } from "@/lib/requestHandler";
-import { resendVerificationSchema, type ResendVerificationInput } from "@/lib/validations";
+import {
+  type ResendVerificationInput,
+  resendVerificationSchema,
+} from "@/lib/validations";
 
 interface ResendVerificationResponse {
   success: boolean;
@@ -15,7 +18,10 @@ interface ResendVerificationResponse {
 }
 
 const resendVerification = requestHandler((data: ResendVerificationInput) =>
-  axiosInstance.post<ResendVerificationResponse>("/auth/resend-verification", data),
+  axiosInstance.post<ResendVerificationResponse>(
+    "/auth/resend-verification",
+    data,
+  ),
 );
 
 export function useResendVerification() {
@@ -32,11 +38,15 @@ export function useResendVerification() {
     const result = await resendVerification(data);
 
     if (result.code === "success") {
-      setSuccessMessage(result.data.data.message ?? "Verification email sent! Check your inbox.");
+      setSuccessMessage(
+        result.data.data.message ??
+          "Verification email sent! Check your inbox.",
+      );
       form.reset();
     } else {
       const message = isAxiosError<{ error?: string }>(result.error)
-        ? (result.error.response?.data?.error ?? "Failed to send verification email.")
+        ? (result.error.response?.data?.error ??
+          "Failed to send verification email.")
         : "Network error. Please try again.";
       form.setError("root", { message });
     }

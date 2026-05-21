@@ -78,10 +78,7 @@ export function EmailLayout({ preview, children }: EmailLayoutProps) {
       <Body style={s.body}>
         <Container style={s.container}>
           <Section style={s.header}>
-            <Link
-              href={HOME_URL}
-              style={{ textDecoration: "none" }}
-            >
+            <Link href={HOME_URL} style={{ textDecoration: "none" }}>
               <Text style={{ margin: 0 }}>
                 <span style={s.logoZ}>Z</span>
                 <span style={s.logoRest}>yraa</span>

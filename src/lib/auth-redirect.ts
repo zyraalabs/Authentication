@@ -1,11 +1,14 @@
-import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
+import { getServerSession } from "next-auth";
 import { authOptions } from "./auth";
+import { ZYRAA_APP_URL } from "./env";
 import { createExchangeCode } from "./exchange-code";
 import { logger } from "./logger";
-import { ZYRAA_APP_URL } from "./env";
 
-export async function getAuthCallbackUrl(): Promise<{ url: string; name: string }> {
+export async function getAuthCallbackUrl(): Promise<{
+  url: string;
+  name: string;
+}> {
   const session = await getServerSession(authOptions);
 
   if (!session?.user) {
@@ -15,7 +18,10 @@ export async function getAuthCallbackUrl(): Promise<{ url: string; name: string 
 
   const code = await createExchangeCode(session.user.id);
 
-  logger.info("auth-redirect", `Exchange code created, redirecting: ${session.user.email}`);
+  logger.info(
+    "auth-redirect",
+    `Exchange code created, redirecting: ${session.user.email}`,
+  );
 
   return {
     url: `${ZYRAA_APP_URL}/api/auth/callback?code=${code}`,

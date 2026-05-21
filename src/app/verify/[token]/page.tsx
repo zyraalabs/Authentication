@@ -1,17 +1,25 @@
+import { UserModel } from "@zyraalabs/zyraa-db";
+import type { Metadata } from "next";
 import { AuthLayout } from "@/components/auth/auth-layout";
 import { VerifyResult } from "@/components/auth/verify-result";
 import { connectToDatabase } from "@/lib/db";
-import { generateVerificationToken, getVerificationTokenExpiry } from "@/lib/tokens";
 import { sendVerificationEmail } from "@/lib/email";
 import { logger } from "@/lib/logger";
-import { UserModel } from "@zyraalabs/zyraa-db";
-import type { Metadata } from "next";
+import {
+  generateVerificationToken,
+  getVerificationTokenExpiry,
+} from "@/lib/tokens";
 
 export const metadata: Metadata = {
   title: "Verify email | Zyraa",
 };
 
-type VerifyStatus = "success" | "already-verified" | "expired" | "invalid" | "error";
+type VerifyStatus =
+  | "success"
+  | "already-verified"
+  | "expired"
+  | "invalid"
+  | "error";
 
 async function verifyToken(token: string): Promise<VerifyStatus> {
   try {
@@ -22,7 +30,10 @@ async function verifyToken(token: string): Promise<VerifyStatus> {
     if (!user) return "invalid";
     if (user.emailVerified) return "already-verified";
 
-    if (user.verificationTokenExpires && new Date() > user.verificationTokenExpires) {
+    if (
+      user.verificationTokenExpires &&
+      new Date() > user.verificationTokenExpires
+    ) {
       const newToken = generateVerificationToken();
       user.verificationToken = newToken;
       user.verificationTokenExpires = getVerificationTokenExpiry();
@@ -30,7 +41,10 @@ async function verifyToken(token: string): Promise<VerifyStatus> {
 
       try {
         await sendVerificationEmail(user.email, user.name ?? "", newToken);
-        logger.info("verify-page", `New verification email sent to: ${user.email}`);
+        logger.info(
+          "verify-page",
+          `New verification email sent to: ${user.email}`,
+        );
       } catch {
         logger.error("verify-page", `Failed to resend to: ${user.email}`);
       }

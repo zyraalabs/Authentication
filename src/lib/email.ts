@@ -1,8 +1,8 @@
 import { render } from "@react-email/components";
 import { Resend } from "resend";
+import { ResetPasswordEmail } from "@/emails/reset-password";
 import { VerifyEmail } from "@/emails/verify-email";
 import { WelcomeEmail } from "@/emails/welcome";
-import { ResetPasswordEmail } from "@/emails/reset-password";
 import { APP_URL, RESEND_API_KEY, RESEND_FROM_EMAIL } from "./env";
 import { logger } from "./logger";
 

@@ -1,16 +1,16 @@
-import { NextRequest } from "next/server";
-import bcrypt from "bcryptjs";
-import { connectToDatabase } from "@/lib/db";
-import { SuccessResponse, ErrorResponse } from "@/lib/apiResponse";
 import { Plan, Provider, UserModel } from "@zyraalabs/zyraa-db";
-import { registerSchema, RegisterInput } from "@/lib/validations";
+import bcrypt from "bcryptjs";
+import type { NextRequest } from "next/server";
 import { ZodError } from "zod";
+import { ErrorResponse, SuccessResponse } from "@/lib/apiResponse";
+import { connectToDatabase } from "@/lib/db";
+import { sendVerificationEmail } from "@/lib/email";
+import { logger } from "@/lib/logger";
 import {
   generateVerificationToken,
   getVerificationTokenExpiry,
 } from "@/lib/tokens";
-import { sendVerificationEmail } from "@/lib/email";
-import { logger } from "@/lib/logger";
+import { type RegisterInput, registerSchema } from "@/lib/validations";
 
 export async function POST(request: NextRequest) {
   try {
@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
     if (existingUser) {
       logger.warn(
         "register",
-        `Registration failed - email already exists: ${email}`
+        `Registration failed - email already exists: ${email}`,
       );
       return ErrorResponse("User with this email already exists", 409);
     }
@@ -67,7 +67,7 @@ export async function POST(request: NextRequest) {
       logger.error(
         "register",
         `Failed to send verification email to: ${email}`,
-        emailError
+        emailError,
       );
     }
     const userResponse = {
@@ -83,7 +83,7 @@ export async function POST(request: NextRequest) {
 
     logger.info(
       "register",
-      `Registration completed successfully for: ${email}`
+      `Registration completed successfully for: ${email}`,
     );
     return SuccessResponse(
       {
@@ -91,7 +91,7 @@ export async function POST(request: NextRequest) {
           "User registered successfully. Please check your email to verify your account.",
         user: userResponse,
       },
-      201
+      201,
     );
   } catch (error) {
     if (error instanceof ZodError) {

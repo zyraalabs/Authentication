@@ -2,13 +2,21 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { AuthLogo } from "./auth-logo";
 
-type VerifyStatus = "success" | "already-verified" | "expired" | "invalid" | "error";
+type VerifyStatus =
+  | "success"
+  | "already-verified"
+  | "expired"
+  | "invalid"
+  | "error";
 
 interface VerifyResultProps {
   status: VerifyStatus;
 }
 
-const STATES: Record<VerifyStatus, { icon: string; title: string; body: string }> = {
+const STATES: Record<
+  VerifyStatus,
+  { icon: string; title: string; body: string }
+> = {
   success: {
     icon: "✓",
     title: "Email verified.",
@@ -36,7 +44,8 @@ const STATES: Record<VerifyStatus, { icon: string; title: string; body: string }
   },
 };
 
-const isSuccess = (s: VerifyStatus) => s === "success" || s === "already-verified" || s === "expired";
+const isSuccess = (s: VerifyStatus) =>
+  s === "success" || s === "already-verified" || s === "expired";
 
 export function VerifyResult({ status }: VerifyResultProps) {
   const state = STATES[status];
